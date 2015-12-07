@@ -42,11 +42,11 @@ gulp.task('libs', function() {
   gulp.src(bc+'jquery/dist/jquery.js')
       .pipe(gulp.dest('./../laravel/public/fitness/libs/jquery/'));
 
-  gulp.src(bc+'bootstrap/dist/**/*.*')
-      .pipe(gulp.dest('./../laravel/public/fitness/libs/bootstrap/'));
-
-  gulp.src(bc+'bootstrap-material-design/dist/**/*.*')
-      .pipe(gulp.dest('./../laravel/public/fitness/libs/bootstrap-material-design/'));
+//  gulp.src(bc+'bootstrap/dist/**/*.*')
+//      .pipe(gulp.dest('./../laravel/public/fitness/libs/bootstrap/'));
+//
+//  gulp.src(bc+'bootstrap-material-design/dist/**/*.*')
+//      .pipe(gulp.dest('./../laravel/public/fitness/libs/bootstrap-material-design/'));
 
   gulp.src([bc+'angular/angular.js',
 //            bc+'angular-animate/angular-animate.js',
