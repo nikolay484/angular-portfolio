@@ -6,30 +6,29 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     csso = require('gulp-csso');
     
-var bc = 'app/bower_components/';
+var bc = 'bower_components/';
 
 
 gulp.task('html', function() {
-  gulp.src('builds/development/**/*.html')
-    .pipe(gulp.dest('../laravel/public/fitness/'))
+  gulp.src('app/**/*.html')
+    .pipe(gulp.dest('prod/'))
 });
 
 gulp.task('sass', function () {
-  gulp.src('builds/development/sass/**/*')
+  gulp.src('app/sass/**/*')
       .pipe(sass())
       .pipe(concat('style.min.css'))
-      .pipe(csso())
-      .pipe(gulp.dest('../laravel/public/fitness/css/'));
+      .pipe(gulp.dest('prod/css/'));
 });
 
 gulp.task('img', function() {
-  gulp.src('builds/development/img/**/*')
-    .pipe(gulp.dest('../laravel/public/fitness/img/'));
+  gulp.src('img/**/*')
+    .pipe(gulp.dest('prod/img/'));
 });
 gulp.task('app', function() {
-    gulp.src('builds/development/app/**/*.js')
+    gulp.src('app/**/*.js')
         .pipe(concat('build.js'))
-        .pipe(gulp.dest('../laravel/public/fitness/app'))
+        .pipe(gulp.dest('prod'))
 });
 gulp.task('watch', function() {
   gulp.watch('builds/development/app/**/*.js', ['app']);
@@ -40,29 +39,44 @@ gulp.task('watch', function() {
 
 gulp.task('libs', function() {
   gulp.src(bc+'jquery/dist/jquery.js')
-      .pipe(gulp.dest('./../laravel/public/fitness/libs/jquery/'));
+      .pipe(gulp.dest('prod/libs/jquery/'));
 
-//  gulp.src(bc+'bootstrap/dist/**/*.*')
-//      .pipe(gulp.dest('./../laravel/public/fitness/libs/bootstrap/'));
+  gulp.src(bc+'font-awesome/css/*.*')
+      .pipe(gulp.dest('prod/libs/font-awesome/css'));
+
+  gulp.src(bc+'font-awesome/fonts/*')
+        .pipe(gulp.dest('prod/libs/font-awesome/fonts'));
+
+  gulp.src(bc+'bootstrap/dist/**/*.*')
+      .pipe(gulp.dest('prod/libs/bootstrap/'));
+
+  gulp.src(bc+'bxslider-4/dist/**/*.*')
+      .pipe(gulp.dest('prod/libs/bxslider/'));
+
+    gulp.src(bc+'masonry/dist/*.*')
+       .pipe(gulp.dest('prod/libs/masonry/'));
+
+    gulp.src(bc+'imagesloaded/*.js')
+        .pipe(gulp.dest('prod/libs/imagesloaded/'));
 //
 //  gulp.src(bc+'bootstrap-material-design/dist/**/*.*')
 //      .pipe(gulp.dest('./../laravel/public/fitness/libs/bootstrap-material-design/'));
 
   gulp.src([bc+'angular/angular.js',
-//            bc+'angular-animate/angular-animate.js',
-//            bc+'angular-cookies/angular-cookies.js',
-//            bc+'angular-bootstrap/ui-bootstrap.js',
+            bc+'angular-animate/angular-animate.js',
+            bc+'angular-cookies/angular-cookies.js',
+            bc+'angular-bootstrap/ui-bootstrap-tpls.min.js',
 //            bc+'angular-i18n/angular-locale_ru-ru.js',
             bc+'angular-loader/angular-loader.js',
 //            bc+'angular-resource/angular-resource.js',
             bc+'angular-route/angular-route.js',
-//            bc+'angular-sanitize/angular-sanitize.js',
+            bc+'angular-sanitize/angular-sanitize.js',
 //            bc+'angular-touch/angular-touch.js',
 //            bc+'firebase/firebase.js',
 //            bc+'angularfire/dist/angularfire.js',
           ])
       .pipe(concat('angular.concat.js'))
-      .pipe(gulp.dest('prod/laravel/public/fitness/libs/angular/'));
+      .pipe(gulp.dest('prod/libs/angular/'));
 });
 
 gulp.task('webserver', function() {
@@ -74,7 +88,7 @@ gulp.task('webserver', function() {
 });
 
 gulp.task('default', [
-    'libs',
+    //'libs',
     'html',
     'img',
 //  'js',
